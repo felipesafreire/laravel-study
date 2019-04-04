@@ -5,3 +5,11 @@ Route::get('/', function () {
 });
 
 Route::get('/nome', "MeuController@getNome");
+
+Route::get('/idade', "MeuController@getIdade");
+
+Route::get('/multiplicar/{n1}/{n2}', "MeuController@multiplicar");
+
+Route::get('/nome/{id}', "MeuController@getNomeById");
+
+Route::resource('/cliente', "ClienteController");
