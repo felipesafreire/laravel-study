@@ -1,0 +1,17 @@
+[01-Apr-2019 15:58:00 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home/ubuntu/workspace/curso/vendor/composer/../nunomaduro/collision/src/Provider.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php:444
+Stack trace:
+#0 /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php(444): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home/u...', '/home/ubuntu/wo...', 444, Array)
+#1 /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php(444): include()
+#2 /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/ubuntu/wo...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('NunoMaduro\\Coll...')
+#4 [internal function]: spl_autoload_call('NunoMaduro\\Coll...')
+#5 /home/ubuntu/workspace/curso/vendor/laravel/framework/src/Illuminate/Container/Container.php(767): ReflectionClass->__construct('NunoMaduro\\Coll...')
+#6 /home/ubuntu/workspace/curso/vendor/laravel/framework/src/Illuminate/C in /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php on line 444
+[01-Apr-2019 15:58:00 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home/ubuntu/workspace/curso/vendor/composer/../symfony/debug/Exception/FatalErrorException.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php:444
+Stack trace:
+#0 /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php(444): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home/u...', '/home/ubuntu/wo...', 444, Array)
+#1 /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php(444): include()
+#2 /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/ubuntu/wo...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home/ubuntu/workspace/curso/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(136): spl_autoload_call('Symfony\\Compone...')
+#5 /home/ubuntu/workspace/curso/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): I in /home/ubuntu/workspace/curso/vendor/composer/ClassLoader.php on line 444
