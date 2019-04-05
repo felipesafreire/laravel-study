@@ -27,6 +27,9 @@
     <h1>Não tem produto.</h1>
 @endempty
 
+@foreach ($produtos as $produto)
+    <p>Nome: {{$produto}}</p>
+@endforeach
 
 <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
 </body>

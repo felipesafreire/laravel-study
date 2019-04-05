@@ -16,7 +16,6 @@ class ProdutoController extends Controller
             "Impressora HP",
             "Disco SSD 512 GB"
         ];
-        $produtos = [];
         return view("produtos", compact('produtos'));
     }
 
@@ -38,5 +37,17 @@ class ProdutoController extends Controller
     public function loopFor($n)
     {
         return view('loop_for', compact('n'));
+    }
+
+    public function loopForEach()
+    {
+        $produtos = [
+            ["id" => 1, "nome" => "Notebook Asus i7 16GB"],
+            ["id" => 2, "nome" => "Mouse e Teclado Microsoft USB"],
+            ["id" => 3, "nome" => "Monitor 21 - Samsumg"],
+            ["id" => 4, "nome" => "Impressora HP"],
+            ["id" => 5, "nome" => "Disco SSD 512 GB"]
+        ];
+        return view('foreach', compact('produtos'));
     }
 }

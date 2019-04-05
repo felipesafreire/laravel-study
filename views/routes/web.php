@@ -40,3 +40,5 @@ Route::get('/mostraropcoes', 'ProdutoController@mostraropcoes');
 Route::get('/opcoes/{opcao}', 'ProdutoController@opcoes');
 
 Route::get('/loop/for/{n}', 'ProdutoController@loopFor');
+
+Route::get('/loop/foreach', 'ProdutoController@loopForEach');

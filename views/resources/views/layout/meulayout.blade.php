@@ -26,6 +26,12 @@
 
 @endif
 
+@hasSection('secao_conteudo')
+
+    @yield('secao_conteudo')
+    
+@endif
+
 <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
 </body>
 </html>
