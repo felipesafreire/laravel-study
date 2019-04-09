@@ -14,12 +14,10 @@ class CategoriasSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $i = 0;
-        while($i == 100){
+        for ($i = 0; $i < 100; $i++) {
             DB::table('categorias')->insert([
                 'nome' => $faker->domainWord
             ]);
-            $i++;
         }
     }
 }
