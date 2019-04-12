@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Categoria;
 
 class ControladorCategoria extends Controller
@@ -17,6 +17,17 @@ class ControladorCategoria extends Controller
     {
         $cats = Categoria::all();
         return view('categorias', compact('cats'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexJson()
+    {
+        $cats = Categoria::all();
+        return response()->json($cats);
     }
 
     /**

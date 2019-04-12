@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Produto;
 
 class ControladorProduto extends Controller
 {
@@ -13,8 +15,14 @@ class ControladorProduto extends Controller
      */
     public function index()
     {
+        return Produto::all()->toJson();
+    }
+
+    public function indexView()
+    {
         return view('produtos');
     }
+
 
     /**
      * Show the form for creating a new resource.
