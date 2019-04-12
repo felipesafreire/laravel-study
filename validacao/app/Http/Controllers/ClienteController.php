@@ -37,6 +37,18 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        $regras = [
+            'nome' => 'required|min:1|max:50|unique:clientes',
+            'idade' => 'required|min:18',
+            'endereco' => 'required',
+            'email' => 'required|email',
+        ];
+        $mensagens = [
+            'required' => "O atributo :attribute não pode ser branco",
+            'nome.required' => 'O nome é requerido',
+        ];
+        $request->validate($regras, $mensagens);
+        
         $cliente = new Cliente();
         $cliente->nome = $request->input('nome');
         $cliente->email = $request->input('email');
