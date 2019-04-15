@@ -13,7 +13,7 @@
                 <button onclick="novoProduto()" class="btn btn-sm btn-primary float-right" role="button">Novo Produto</button>
             </div>
         </div>
-        <table class="table table-ordered table-hover">
+        <table class="table table-ordered table-hover" id="tblProdutos">
             <thead>
                 <tr>
                     <th>Código</th>
@@ -78,10 +78,63 @@
 
 <script>
 
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        }
+    })
+
     $(document).ready(function(){
         carregaCategorias();
         carregaProdutos();
     })
+
+    $("#formPoduto").submit(function(event){
+        event.preventDefault();
+        if($("#id").val()==''){
+            criarProduto()
+        }else{
+            editarProduto();
+        }
+        $("#cadastroProduto").modal('hide');
+    });
+
+    function criarProduto(){
+        $.post('/api/produtos', 
+        {
+            nome: $('#nomeProduto').val(),
+            preco: $('#precoProduto').val(),
+            estoque: $('#quantidadeProduto').val(),
+            categoria_id: $('#departamentoProduto').val()
+        }, 
+        function(data){
+            $("#tblProdutos > tbody").append(montarTabela(data))
+        },'json')
+    }
+
+    function editarProduto(){
+        $.ajax({
+            url: `/api/produtos/${$('#id').val()}`,
+            type: 'PUT',
+            data: {
+                id: $('#id').val(),
+                nome: $('#nomeProduto').val(),
+                preco: $('#precoProduto').val(),
+                estoque: $('#quantidadeProduto').val(),
+                categoria_id: $('#departamentoProduto').val()
+            },
+            success: function(data) { 
+                var linha = $("#tblProdutos > tbody > tr").filter(function(i,produto){ return $(this).find('td').eq(0).text() == $('#id').val() });
+                console.log(linha);
+                if(linha){
+                    $(linha).replaceWith(montarTabela(JSON.parse(data)))
+                }
+            },
+            error: function(error){
+                alert(error);
+            }
+        })
+    }
 
     function novoProduto(){
         document.getElementById("formPoduto").reset();
@@ -91,7 +144,7 @@
     function carregaProdutos(){
         $.getJSON('/api/produtos', function(data) { 
             $.each(data, function(i, produto) {
-                console.log(produto);
+                $("#tblProdutos > tbody").append(montarTabela(produto));
             });
         });
     }
@@ -103,6 +156,47 @@
                 $('#departamentoProduto').append('<option value="' + categoria.id + '">' + categoria.nome + '</option>');
             });
         });
+    }
+
+    function montarTabela(produto){
+        return "<tr>"+
+            "<td>"+ produto.id +"</td>" + 
+            "<td>"+ produto.nome +"</td>" + 
+            "<td>"+ produto.estoque +"</td>" +
+            "<td>"+ produto.preco +"</td>" + 
+            "<td>"+ produto.categoria_id +"</td>" + 
+            "<td>" + 
+                "<button type='button' class='btn btn-primary btn-sm' onclick='editar("+produto.id+")'>Editar</button> " + 
+                "<button type='button' class='btn btn-danger btn-sm' onclick='apagar("+produto.id+")'>Apagar</button>" + 
+            "</td>" + 
+        +"</tr>";
+    }
+
+    function editar(id){
+        $.getJSON(`/api/produtos/${id}`, function(data) { 
+            $('#id').val(data.id);
+            $('#nomeProduto').val(data.nome);
+            $('#precoProduto').val(data.preco);
+            $('#quantidadeProduto').val(data.estoque);
+            $('#departamentoProduto').val(data.categoria_id);
+            $("#cadastroProduto").modal('show');
+        });
+    }
+
+    function apagar(id){
+        $.ajax({
+            url: `/api/produtos/${id}`,
+            type: 'DELETE',
+            success: function(result) { 
+                var linha = $("#tblProdutos > tbody > tr").filter(function(i,produto){ return $(this).find('td').eq(0).text() == id });
+                if(linha){
+                    linha.remove();
+                }
+            },
+            error: function(error){
+                alert(error);
+            }
+        })
     }
 
 </script>
