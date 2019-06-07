@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PostController@index');
+Route::post('/', 'PostController@store');
+Route::delete('/{id}', 'PostController@destroy');
+Route::get('/download/{id}', 'PostController@download');
